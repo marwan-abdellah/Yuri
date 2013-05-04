@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <typeinfo>
 
 #include "Memory_1D.h"
 
@@ -18,8 +19,11 @@ public:
     // Constructor
     Vector(const int iX): X(iX)
     {
-        // Allocate Vector data chumk
+        // Allocate Vector data chunk
         pData = YURI_MEM_1D_NS::Allocate <T> (X);
+
+        // Initialize the vector to zeros
+        this->Zeros();
     }
 
     // Fill the vector with random numbers
@@ -29,12 +33,38 @@ public:
             pData[i] = (T) rand();
     }
 
+    // Fill the vector with constant values
+    void Constant( const T iValue )
+    {
+        for (int i = 0; i < X; i++)
+            pData[i] = (T) iValue;
+    }
+
+    // Fill the vector with zeros
+    void Zeros( void )
+    {
+       this->Constant(0);
+    }
+
+    // Fill the vector with zeros
+    void Ones( void )
+    {
+       this->Constant(1);
+    }
+
+    // Fill the vector with continuous numbers starting 0
+    void Linear( void )
+    {
+        for (int i = 0; i < X; i++)
+            pData[i] = (T) i;
+    }
+
     // Print the vector to the standard output
     void Print( void )
     {
-        std::cout << std::endl;
         for (int i = 0; i < X; i++)
             std::cout << (T) pData[i] << std::endl;
+        std::cout << std::endl;
     }
 
     // Retruns X dimension
@@ -50,11 +80,41 @@ public:
         YURI_MEM_1D_NS::Free <T> (pData);
     }
 
-private:
-    const int X;    // Width - X-axis
-    const int Y;    // Height - Y-axis
+    ///////////////////////////////////////////////////////////////////////////////
+    /// Operators
+    ///////////////////////////////////////////////////////////////////////////////
+    // Addition
+    void operator+(const Vector *iVector)
+    {
+        if (X != iVector->GetX())
+        {
+            std::cout << "The vectors can't be added because " <<
+                         "they don't have the same size" << std::endl;
 
-    // Pointer to Vector data in 2D array
+            return;
+        }
+        for (int i = 0; i < X; i++)
+            this->pData[i] += (T) iVector->GetPVectorData()[i];
+    }
+
+    // Subtraction
+    void operator+(const Vector *iVector)
+    {
+        if (X != iVector->GetX())
+        {
+            std::cout << "The vectors can't be added because " <<
+                         "they don't have the same size" << std::endl;
+
+            return;
+        }
+        for (int i = 0; i < X; i++)
+            this->pData[i] += (T) iVector->GetPVectorData()[i];
+    }
+
+private:
+    const int X;    // Vector length
+
+    // Pointer to Vector data in 1D array
     T* pData;
 };
 

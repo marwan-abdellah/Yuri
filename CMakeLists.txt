@@ -99,4 +99,5 @@ set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
 #########################################################
 # Compile Examples
 #########################################################
-ADD_EXECUTABLE(Vector "Tests/Vector" ${CPP_SOURCES})
+ADD_EXECUTABLE(VectorTypes "Tests/VectorTypes.cpp" ${CPP_SOURCES})
+ADD_EXECUTABLE(VectorOperators "Tests/VectorOperators.cpp" ${CPP_SOURCES})
