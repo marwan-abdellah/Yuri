@@ -12,11 +12,4 @@ namespace YURI_MEM_1D_NS = Yuri::Memory::Memory_1D;
 namespace YURI_MEM_2D_NS = Yuri::Memory::Memory_2D;
 namespace YURI_MEM_3D_NS = Yuri::Memory::Memory_3D;
 
-///////////////////////////////////////////////////////////////////////////////
-// Define(s)
-///////////////////////////////////////////////////////////////////////////////
-typedef Yuri::Vector YURI_VECTOR;
-typedef Yuri::Image YURI_IMAGE;
-typedef Yuri::Volume YURI_VOLUME;
-
 #endif // DEFINITIONS_H

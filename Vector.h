@@ -2,6 +2,8 @@
 #define VECTOR_H
 
 #include <stdlib.h>
+#include <iostream>
+
 #include "Memory_1D.h"
 
 // Namespace
@@ -20,11 +22,26 @@ public:
         pData = YURI_MEM_1D_NS::Allocate <T> (X);
     }
 
+    // Fill the vector with random numbers
+    void Random( void )
+    {
+        for (int i = 0; i < X; i++)
+            pData[i] = (T) rand();
+    }
+
+    // Print the vector to the standard output
+    void Print( void )
+    {
+        std::cout << std::endl;
+        for (int i = 0; i < X; i++)
+            std::cout << (T) pData[i] << std::endl;
+    }
+
     // Retruns X dimension
     int GetX( void ) const { return X; }
 
     // Retruns a pointer to the Vector 2D data in arranged in a flast 1D array
-    T** GetPVectorData( void ) { return pData; }
+    T* GetPVectorData( void ) { return pData; }
 
     // Destructor
     ~Vector ( void )
@@ -38,7 +55,7 @@ private:
     const int Y;    // Height - Y-axis
 
     // Pointer to Vector data in 2D array
-    T** pData;
+    T* pData;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
